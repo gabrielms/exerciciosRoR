@@ -1,19 +1,28 @@
 def stock_picker(array_of_prices)
+	should_buy_index  = 0
+	should_buy_value  = 99999999
+	should_sell_index = 0
+	should_sell_value = -99999999
 	
-	lower_price = array_of_prices.bsearch{|x| x <= x}
-
-	# puts lower_price
-
-	lower_price_index  = array_of_prices.index(lower_price)
-	
-	a = array_of_prices.combination(2).to_a
-	
-	puts a.inspect
-	a.each do |a|
-		better_choice = 
-		puts a.at(0) - a.at(1)
+	for i in 0..array_of_prices.count - 1
+		if array_of_prices[i] < should_buy_value then
+			should_buy_value = array_of_prices[i]
+			should_buy_index = i
+		end		
 	end
+
+	for i in should_buy_index..array_of_prices.count - 1
+		if array_of_prices[i] > should_sell_value then
+			should_sell_value = array_of_prices[i]
+			should_sell_index = i
+		end		
+	end
+
+	should_buy_index  += 1
+	should_sell_index += 1
+
+	Array.new([should_buy_index,should_sell_index]).inspect
 
 end
 
-stock_picker([2,1,3,4])
+puts stock_picker([99,22,34,55])
